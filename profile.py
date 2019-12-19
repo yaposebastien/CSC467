@@ -15,3 +15,4 @@ node.routable_control_ip = "true"
 node.disk_image = "urn:publicid:IDN+emulab.net+image+emulab-ops:UBUNTU18-64-STD"
 node.addService(pg.Execute(shell="sh", command="sudo bash /local/repository/install_docker.sh")) 
 pc.printRequestRSpec(request)
+
