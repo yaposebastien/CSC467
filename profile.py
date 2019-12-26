@@ -54,10 +54,10 @@ for i in range(params.workerCount + 1):
   node.disk_image = "urn:publicid:IDN+emulab.net+image+emulab-ops:CENTOS7-64-STD"
   bs = node.Blockstore("bs" + str(i), "/hadoop")
   bs.size = "100GB"
-  
+   
   if i == 0:
     bs_landing = node.Blockstore("bs_landing", "/landing")
-    bs_landing.size = "500GB"
+    bs_landing.size = "300GB"
     
   iface = node.addInterface("if" + str(i-3))
   iface.component_id = "eth1"
@@ -65,7 +65,8 @@ for i in range(params.workerCount + 1):
   link.addInterface(iface)
   
   node.addService(pg.Execute(shell="sh", command="sudo bash /local/repository/environment_prep.sh"))
-  
+  node.addService(pg.Execute(shell="sh", command="sudo bash /local/repository/setup_jupyter.sh"))
+    
   if i == 0:
     node.addService(pg.Execute(shell="sh", command="sudo yum install -y ambari-server"))
     node.addService(pg.Execute(shell="sh", command="sudo ambari-server setup -s"))
